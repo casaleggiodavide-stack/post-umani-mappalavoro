@@ -126,8 +126,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 #ft b{color:var(--tl)}
 #ft a{color:var(--tl)}
 /* Book Wall */
-.bw-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:20;background:rgba(237,228,204,.85);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;padding:24px}
-.bw-card{max-width:420px;width:100%;text-align:center;padding:32px 28px;border-radius:16px;background:rgba(255,255,255,.6);border:1px solid rgba(0,0,0,.06)}
+.bw-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:20;background:rgba(237,228,204,.45);display:flex;align-items:center;justify-content:center;padding:24px}
+.bw-card{max-width:420px;width:100%;text-align:center;padding:32px 28px;border-radius:16px;background:rgba(255,255,255,.95);border:1px solid rgba(0,0,0,.08);box-shadow:0 20px 60px rgba(0,0,0,.2)}
 .bw-icon{font-size:48px;margin-bottom:12px}
 .bw-title{font-size:18px;font-weight:800;color:var(--text);margin-bottom:8px}
 .bw-desc{font-size:13px;color:var(--tl);line-height:1.6;margin-bottom:16px;font-family:'Source Serif 4',serif}
@@ -503,8 +503,8 @@ function showBookWall(idx){
     document.getElementById("dps").style.filter="none";
     return;
   }
-  document.getElementById("dpb").style.filter="blur(6px)";
-  document.getElementById("dps").style.filter="blur(4px)";
+  document.getElementById("dpb").style.filter="blur(4px)";
+  document.getElementById("dps").style.filter="blur(3px)";
   var ch=getChallenge(idx);
   var ov=document.createElement("div");
   ov.className="bw-overlay";
