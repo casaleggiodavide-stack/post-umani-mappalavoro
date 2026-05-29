@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nota metodologica — La mappa del lavoro che verrà</title>
+<meta name="description" content="Come è stata costruita la mappa dell'esposizione delle professioni italiane all'IA: dati ISTAT osservati e stima dello score di esposizione. Da Post-umani di Davide Casaleggio.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://mappalavoro.post-umani.it/metodologia.html">
+<meta property="og:title" content="Nota metodologica — La mappa del lavoro che verrà">
+<meta property="og:description" content="Come distinguiamo il dato ISTAT osservato dalla stima dello score di esposizione all'IA.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mappalavoro.post-umani.it/metodologia.html">
+<meta property="og:image" content="https://mappalavoro.post-umani.it/cover-post-umani.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+:root{--gold:#c9a040;--red:#d03a28;--orange:#e09428;--green:#1b6834;--teal:#167060;--cream:#ede4cc;--text:#2a2318;--tl:#5c5040;--tm:#8a7d68}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:var(--cream);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");opacity:.4}
+#hdr{position:relative;padding:32px 28px 26px;background:linear-gradient(170deg,#d6b44a 0%,#c9a63e 40%,#b89435 100%);border-bottom:3px solid rgba(0,0,0,.06)}
+.back{display:inline-block;color:rgba(255,255,255,.85);font-size:12px;font-weight:600;text-decoration:none;margin-bottom:14px;letter-spacing:.3px}
+.back:hover{color:#fff}
+#hdr h1{font-size:clamp(22px,4vw,34px);font-weight:900;color:#fff;line-height:1.15;letter-spacing:-0.5px;text-shadow:0 2px 10px rgba(0,0,0,.12)}
+#hdr p{color:rgba(255,255,255,.8);font-size:13px;margin-top:10px;max-width:720px}
+main{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:32px 24px 64px}
+section{background:rgba(255,255,255,.5);border:1px solid rgba(0,0,0,.05);border-radius:14px;padding:22px 26px;margin-bottom:18px}
+h2{font-size:18px;font-weight:800;color:var(--text);margin-bottom:10px}
+h2 .tag{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:3px 9px;border-radius:6px;vertical-align:middle;margin-left:8px}
+.tag.obs{background:rgba(27,104,52,.14);color:var(--green)}
+.tag.est{background:rgba(208,58,40,.12);color:var(--red)}
+h3{font-size:14px;font-weight:700;color:var(--tl);margin:16px 0 6px}
+p{font-family:'Source Serif 4',serif;font-size:15px;color:var(--tl);margin-bottom:12px}
+p b{color:var(--text);font-weight:600}
+ul{font-family:'Source Serif 4',serif;font-size:15px;color:var(--tl);margin:0 0 12px 20px}
+li{margin-bottom:6px}
+a{color:var(--teal)}
+.callout{background:rgba(201,160,64,.1);border:1px solid rgba(201,160,64,.25);border-radius:10px;padding:14px 18px;margin-bottom:12px}
+.callout p{margin-bottom:0;font-size:14px}
+.fill{background:rgba(208,58,40,.06);border:1px dashed rgba(208,58,40,.4);border-radius:8px;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--red);margin:8px 0}
+.muted{font-size:12px;color:var(--tm);font-family:'Montserrat',sans-serif}
+.cta{display:inline-block;margin-top:8px;padding:10px 22px;border-radius:8px;background:var(--text);color:var(--cream);font-weight:700;font-size:13px;text-decoration:none}
+footer{position:relative;z-index:1;text-align:center;padding:24px;font-size:11px;color:var(--tm)}
+</style>
+</head>
+<body>
+<div id="hdr">
+<a class="back" href="index.html">&larr; Torna alla mappa</a>
+<h1>Come leggere questa mappa</h1>
+<p>Nota metodologica. Questa pagina spiega da dove vengono i numeri e, soprattutto, distingue ciò che è <b>misurato</b> da ciò che è <b>stimato</b>. Sono due cose molto diverse e non vanno confuse.</p>
+</div>
+<main>
+
+<section>
+<h2>Numero di occupati, retribuzioni, istruzione <span class="tag obs">Dato osservato</span></h2>
+<p>Il numero di occupati per ciascuna delle 79 professioni proviene da <b>ISTAT</b> (Rilevazione sulle forze di lavoro, marzo 2026, 24,1 milioni di occupati complessivi). La classificazione delle professioni segue la <b>CP2021 ISTAT</b>. Le retribuzioni annue lorde mediane (RAL) e i livelli di istruzione tipici derivano da fonti ufficiali (ISTAT, Sistema Informativo Excelsior di Unioncamere, MIM, FNOPI e ordini professionali, indicate caso per caso nella scheda di ogni professione).</p>
+<p>Questi sono <b>dati misurati</b>, non nostre stime.</p>
+</section>
+
+<section>
+<h2>Score di esposizione all'IA <span class="tag est">Stima nostra</span></h2>
+<p>Lo <b>score di esposizione IA</b> (scala 0–10 in ogni scheda) <b>non è un dato ISTAT</b>. È una stima elaborata per il libro <em>Post-umani</em>, costruita a partire dalla letteratura scientifica internazionale sull'esposizione del lavoro all'intelligenza artificiale e ricalibrata sulle professioni italiane.</p>
+<p>Misura quanto le <b>attività tipiche</b> di una professione si sovrappongono alle capacità attuali dei sistemi di IA. <b>Esposizione non significa sostituzione</b>: un punteggio alto può indicare che il ruolo verrà potenziato (l'IA come assistente) oppure ridefinito, non automaticamente che il posto sparirà.</p>
+
+<h3>Riferimenti scientifici di base</h3>
+<ul>
+<li>Felten, Raj &amp; Seamans (2021) — <em>Occupational, industry, and geographic exposure to artificial intelligence</em>.</li>
+<li>Webb (2020) — <em>The Impact of Artificial Intelligence on the Labor Market</em>.</li>
+<li>Eloundou, Manning, Mishkin &amp; Rock (2023) — <em>GPTs are GPTs: An early look at the labor market impact potential of LLMs</em>.</li>
+</ul>
+
+<h3>Come abbiamo calcolato lo score</h3>
+<p>In sintesi: per ogni professione abbiamo mappato le mansioni prevalenti sulle capacità attuali dell'IA, pesando il grado di sovrapposizione e normalizzando il risultato su una scala 0–10.</p>
+<div class="fill">DA COMPLETARE: descrivere in 4–6 righe i passaggi reali (mappatura mansioni → capacità IA, fonte dei pesi, eventuale validazione, cosa rappresentano lo 0 e il 10).</div>
+
+<h3>Outlook occupazionale</h3>
+<p>L'indicatore di <b>outlook</b> stima la variazione tendenziale dell'occupazione della professione. <span class="fill" style="display:inline-block">DA COMPLETARE: fonte e orizzonte temporale (es. proiezioni Excelsior / elaborazione propria).</span></p>
+</section>
+
+<section>
+<h2>Le correlazioni <span class="tag est">Stima nostra</span></h2>
+<p>«Correlazione istruzione ↔ IA» e «Correlazione RAL ↔ IA» sono correlazioni statistiche, pesate per numero di occupati, tra le nostre stime di esposizione e i dati ISTAT su istruzione e retribuzione. Indicano una <b>relazione</b>, non un rapporto di <b>causa-effetto</b>.</p>
+</section>
+
+<section>
+<h2>Limiti dichiarati</h2>
+<ul>
+<li>Lo score misura esposizione <b>tecnica potenziale</b>, non l'adozione reale né i tempi con cui avverrà.</li>
+<li>Non tiene conto di vincoli normativi, organizzativi, di costo o di accettazione sociale, che possono rallentare o impedire l'automazione.</li>
+<li>Va letto come <b>ordine di grandezza</b>, non come previsione puntuale sul destino del singolo lavoratore.</li>
+<li>Le 79 professioni aggregano figure eterogenee: all'interno di ciascuna l'esposizione può variare molto.</li>
+</ul>
+</section>
+
+<section>
+<h2>Versionamento e aggiornamenti</h2>
+<p>Dati e score sono datati <b>marzo 2026 — Score IA v1.0</b>. Ogni futuro aggiornamento sarà archiviato e reso confrontabile, così che le stime di oggi restino verificabili nel tempo. Per segnalazioni o domande metodologiche: <a href="mailto:[INSERIRE EMAIL]">[INSERIRE EMAIL]</a>.</p>
+<a class="cta" href="index.html">&larr; Torna alla mappa</a>
+</section>
+
+</main>
+<footer>
+<b>Post-umani — Le 7 rivoluzioni dell'Intelligenza Artificiale</b>, Davide Casaleggio, Chiarelettere 2026.
+</footer>
+</body>
+</html>
